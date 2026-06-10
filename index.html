@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mappa interattiva dell'Africa</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --panel: #ffffff;
+      --border: #d7dde4;
+      --text: #1f2933;
+      --muted: #687789;
+      --accent: #1d70b8;
+      --hover: #f4b942;
+      --selected: #e85d5d;
+      --code-bg: #f1f4f8;
+      --info-panel-width: 420px;
+      --splitter-width: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      display: grid;
+      grid-template-columns: minmax(260px, 1fr) var(--splitter-width) var(--info-panel-width);
+    }
+
+    #mapArea {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, #eaf4fb 0%, #f8fbfd 100%);
+
+    }
+
+    #svgStage {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      touch-action: none;
+      cursor: grab;
+    }
+
+    #svgStage.dragging { cursor: grabbing; }
+
+    #svgContainer {
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform-origin: 0 0;
+      will-change: transform;
+    }
+
+    #svgContainer svg {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: none;
+      user-select: none;
+    }
+
+    .toolbar {
+      position: absolute;
+      z-index: 20;
+      top: 14px;
+      left: 14px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    .toolbar button {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      font-size: 16px;
+      min-width: 34px;
+      height: 32px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .toolbar button:hover { background: #eef5fb; }
+
+    #zoomValue {
+      min-width: 52px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .toolbar-divider {
+      width: 1px;
+      height: 24px;
+      background: var(--border);
+      margin: 0 2px;
+    }
+
+    .toggle-control {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text);
+      cursor: pointer;
+      user-select: none;
+      padding: 0 4px;
+    }
+
+    .toggle-control input { cursor: pointer; }
+
+    #tooltip {
+      position: fixed;
+      z-index: 50;
+      pointer-events: none;
+      display: none;
+      transform: translate(12px, 12px);
+      background: rgba(20, 29, 39, 0.92);
+      color: #fff;
+      padding: 6px 9px;
+      border-radius: 7px;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    #splitter {
+      position: relative;
+      z-index: 30;
+      background: #eef2f6;
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      cursor: col-resize;
+      user-select: none;
+      touch-action: none;
+    }
+
+    #splitter::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 3px;
+      height: 54px;
+      border-left: 1px solid #98a6b5;
+      border-right: 1px solid #98a6b5;
+      transform: translate(-50%, -50%);
+      opacity: 0.75;
+    }
+
+    #splitter:hover,
+    #splitter.dragging {
+      background: #dfe8f1;
+    }
+
+    body.resizing {
+      cursor: col-resize;
+      user-select: none;
+    }
+
+    body.resizing #svgStage,
+    body.resizing aside {
+      pointer-events: none;
+    }
+
+    aside {
+      overflow: auto;
+      padding: 22px;
+      background: var(--panel);
+    }
+
+    aside h1 {
+      margin: 0 0 8px;
+      font-size: 24px;
+    }
+
+    aside p {
+      line-height: 1.45;
+      color: #394553;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 16px;
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    #stateName {
+      font-size: 21px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    code {
+      background: var(--code-bg);
+      border-radius: 5px;
+      padding: 1px 5px;
+    }
+
+    .loading, .error {
+      min-width: 360px;
+      margin: 80px;
+      padding: 22px;
+      border-radius: 12px;
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      line-height: 1.5;
+    }
+
+    .error { color: #7f1d1d; }
+
+    .interactive-state {
+      cursor: pointer;
+      transition: fill 0.15s ease, opacity 0.15s ease, stroke-width 0.15s ease;
+    }
+
+    .interactive-state:hover {
+      fill: var(--hover) !important;
+      opacity: 0.9;
+    }
+
+    .selected-state {
+      fill: var(--selected) !important;
+      stroke: #7f1d1d !important;
+      stroke-width: 1.4 !important;
+    }
+
+    #markdownContent h1,
+    #markdownContent h2,
+    #markdownContent h3 {
+      line-height: 1.2;
+      margin-top: 1.1em;
+      margin-bottom: 0.45em;
+    }
+
+    #markdownContent h1 { font-size: 24px; }
+    #markdownContent h2 { font-size: 19px; border-bottom: 1px solid var(--border); padding-bottom: 5px; }
+    #markdownContent h3 { font-size: 16px; }
+
+    #markdownContent p, #markdownContent li {
+      line-height: 1.48;
+    }
+
+    #markdownContent a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    #markdownContent a:hover { text-decoration: underline; }
+
+    #markdownContent table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 14px;
+    }
+
+    #markdownContent th,
+    #markdownContent td {
+      border: 1px solid var(--border);
+      padding: 7px 8px;
+      vertical-align: top;
+    }
+
+    #markdownContent th { background: #f7f9fb; text-align: left; }
+
+    .empty-info {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 900px) {
+      body { grid-template-columns: 1fr; grid-template-rows: minmax(380px, 58vh) 1fr; }
+      #mapArea { border-bottom: 1px solid var(--border); }
+      #splitter { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main id="mapArea">
+    <div class="toolbar" aria-label="Controlli mappa">
+      <button id="zoomOut" type="button" title="Zoom out">−</button>
+      <button id="zoomIn" type="button" title="Zoom in">+</button>
+      <button id="resetView" type="button" title="Reset vista">Reset</button>
+      <span id="zoomValue">100%</span>
+      <span class="toolbar-divider" aria-hidden="true"></span>
+      <label class="toggle-control" title="Mostra o nasconde il layer degli Stati">
+        <input id="toggleStatesLayer" type="checkbox" checked>
+        Stati
+      </label>
+    </div>
+
+    <div id="svgStage">
+      <div id="svgContainer">
+        <div class="loading">Caricamento di <code>Africa-map.svg</code>…</div>
+      </div>
+    </div>
+
+    <div id="tooltip"></div>
+  </main>
+
+  <div id="splitter" role="separator" aria-orientation="vertical" aria-label="Ridimensiona mappa e scheda informativa" title="Trascina per ridimensionare mappa e scheda informativa" tabindex="0"></div>
+
+  <aside>
+    <h1>Mappa Africa</h1>
+    <p>
+      Passa con il mouse sopra uno Stato per leggere l'etichetta <code>inkscape:label</code>.
+      Clicca su uno Stato per caricare una scheda Markdown da <code>stati/&lt;nome-stato&gt;.md</code>.
+    </p>
+
+    <section class="card">
+      <div class="label">Stato selezionato / sotto il mouse</div>
+      <div id="stateName">Nessuno</div>
+      <div class="label">Dettagli SVG</div>
+      <div id="stateDetails">Muovi il mouse sopra un path del layer Stati.</div>
+    </section>
+
+    <section class="card">
+      <div class="label">Scheda informativa</div>
+      <div id="markdownContent" class="empty-info">
+        Clicca su uno Stato per aprire la relativa scheda. Per esempio, cliccando sulla Tanzania la pagina cerca il file <code>stati/tanzania.md</code>.
+      </div>
+    </section>
+  </aside>
+
+  <script>
+    const SVG_FILE = 'Africa-map.svg';
+    const STATES_LAYER_ID = 'layer10';
+    const INFO_FOLDER = 'stati';
+
+    const stage = document.getElementById('svgStage');
+    const container = document.getElementById('svgContainer');
+    const tooltip = document.getElementById('tooltip');
+    const stateName = document.getElementById('stateName');
+    const stateDetails = document.getElementById('stateDetails');
+    const markdownContent = document.getElementById('markdownContent');
+    const zoomValue = document.getElementById('zoomValue');
+    const toggleStatesLayer = document.getElementById('toggleStatesLayer');
+    const splitter = document.getElementById('splitter');
+
+    let svgEl = null;
+    let statesLayerEl = null;
+    let selectedState = null;
+    let scale = 1;
+    let translateX = 0;
+    let translateY = 0;
+    const minScale = 0.35;
+    const maxScale = 8;
+
+    function getStateLabel(el) {
+      return (
+        el.getAttribute('inkscape:label') ||
+        el.getAttributeNS('http://www.inkscape.org/namespaces/inkscape', 'label') ||
+        el.dataset.name ||
+        el.id ||
+        ''
+      ).trim();
+    }
+
+    function slugify(value) {
+      return value
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/^the\s+/g, '')
+        .replace(/^republic\s+of\s+/g, '')
+        .replace(/^united\s+republic\s+of\s+/g, '')
+        .replace(/&/g, ' and ')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
+    function escapeHtml(value) {
+      return value
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function inlineMarkdown(text) {
+      let html = escapeHtml(text);
+      html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+      html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+      return html;
+    }
+
+    function parseMarkdown(md) {
+      const lines = md.replace(/\r\n/g, '\n').split('\n');
+      const out = [];
+      let paragraph = [];
+      let inList = false;
+      let inTable = false;
+      let tableRows = [];
+
+      function flushParagraph() {
+        if (!paragraph.length) return;
+        out.push(`<p>${inlineMarkdown(paragraph.join(' '))}</p>`);
+        paragraph = [];
+      }
+
+      function flushList() {
+        if (!inList) return;
+        out.push('</ul>');
+        inList = false;
+      }
+
+      function flushTable() {
+        if (!inTable) return;
+        const rows = tableRows.filter(row => !/^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(row));
+        if (rows.length) {
+          out.push('<table>');
+          rows.forEach((row, index) => {
+            const cells = row.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(cell => inlineMarkdown(cell.trim()));
+            const tag = index === 0 ? 'th' : 'td';
+            out.push('<tr>' + cells.map(cell => `<${tag}>${cell}</${tag}>`).join('') + '</tr>');
+          });
+          out.push('</table>');
+        }
+        tableRows = [];
+        inTable = false;
+      }
+
+      lines.forEach(line => {
+        const trimmed = line.trim();
+
+        if (!trimmed) {
+          flushParagraph();
+          flushList();
+          flushTable();
+          return;
+        }
+
+        if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+          flushParagraph();
+          flushList();
+          inTable = true;
+          tableRows.push(trimmed);
+          return;
+        }
+
+        flushTable();
+
+        const heading = trimmed.match(/^(#{1,3})\s+(.+)$/);
+        if (heading) {
+          flushParagraph();
+          flushList();
+          const level = heading[1].length;
+          out.push(`<h${level}>${inlineMarkdown(heading[2])}</h${level}>`);
+          return;
+        }
+
+        const bullet = trimmed.match(/^[-*]\s+(.+)$/);
+        if (bullet) {
+          flushParagraph();
+          if (!inList) {
+            out.push('<ul>');
+            inList = true;
+          }
+          out.push(`<li>${inlineMarkdown(bullet[1])}</li>`);
+          return;
+        }
+
+        paragraph.push(trimmed);
+      });
+
+      flushParagraph();
+      flushList();
+      flushTable();
+      return out.join('\n');
+    }
+
+    function applyTransform() {
+      container.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      zoomValue.textContent = `${Math.round(scale * 100)}%`;
+    }
+
+    function clampScale(value) {
+      return Math.min(maxScale, Math.max(minScale, value));
+    }
+
+    function zoomAt(clientX, clientY, factor) {
+      const oldScale = scale;
+      const newScale = clampScale(scale * factor);
+      if (newScale === oldScale) return;
+
+      const rect = stage.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+      const contentX = (x - translateX) / oldScale;
+      const contentY = (y - translateY) / oldScale;
+
+      scale = newScale;
+      translateX = x - contentX * scale;
+      translateY = y - contentY * scale;
+      applyTransform();
+    }
+
+    function resetView() {
+      if (!svgEl) return;
+      const stageRect = stage.getBoundingClientRect();
+      const svgBox = svgEl.viewBox && svgEl.viewBox.baseVal && svgEl.viewBox.baseVal.width
+        ? svgEl.viewBox.baseVal
+        : { width: svgEl.width.baseVal.value || 1200, height: svgEl.height.baseVal.value || 1000 };
+
+      const fitScale = Math.min(stageRect.width / svgBox.width, stageRect.height / svgBox.height) * 0.92;
+      scale = clampScale(fitScale || 1);
+      translateX = (stageRect.width - svgBox.width * scale) / 2;
+      translateY = (stageRect.height - svgBox.height * scale) / 2;
+      applyTransform();
+    }
+
+    function showStateInfo(path) {
+      const label = getStateLabel(path);
+      stateName.textContent = label || 'Senza etichetta';
+      stateDetails.innerHTML = `
+        <div>ID path: <code>${escapeHtml(path.id || '(nessun id)')}</code></div>
+        <div>inkscape:label: <code>${escapeHtml(label || '(assente)')}</code></div>
+        <div>File Markdown atteso: <code>${INFO_FOLDER}/${escapeHtml(slugify(label))}.md</code></div>
+      `;
+    }
+
+    async function loadMarkdownForState(label) {
+      const slug = slugify(label);
+      const candidates = [`${INFO_FOLDER}/${slug}.md`];
+
+      // Alias utile se nel file SVG l'etichetta è "United Republic of Tanzania".
+      if (slug.includes('tanzania') && slug !== 'tanzania') {
+        candidates.push(`${INFO_FOLDER}/tanzania.md`);
+      }
+
+      markdownContent.className = '';
+      markdownContent.innerHTML = `<p>Caricamento scheda <code>${escapeHtml(candidates[0])}</code>…</p>`;
+
+      for (const url of candidates) {
+        try {
+          const response = await fetch(url, { cache: 'no-store' });
+          if (!response.ok) continue;
+          const md = await response.text();
+          markdownContent.innerHTML = parseMarkdown(md);
+          return;
+        } catch (error) {
+          // Prova il candidato successivo.
+        }
+      }
+
+      markdownContent.className = 'empty-info';
+      markdownContent.innerHTML = `
+        Nessuna scheda trovata per <strong>${escapeHtml(label)}</strong>.<br><br>
+        Crea un file Markdown chiamato <code>${escapeHtml(candidates[0])}</code> con le informazioni dello Stato.
+      `;
+    }
+
+    function setStatesLayerVisibility(isVisible) {
+      if (!statesLayerEl) return;
+      statesLayerEl.style.display = isVisible ? '' : 'none';
+      tooltip.style.display = 'none';
+      if (!isVisible) {
+        stateName.textContent = 'Layer Stati nascosto';
+        stateDetails.innerHTML = `Il layer <code>${STATES_LAYER_ID}</code> è temporaneamente nascosto.`;
+      } else {
+        stateName.textContent = 'Nessuno';
+        stateDetails.innerHTML = `Layer <code>${STATES_LAYER_ID}</code> visibile. Muovi il mouse sopra uno Stato.`;
+      }
+    }
+
+    toggleStatesLayer.addEventListener('change', () => setStatesLayerVisibility(toggleStatesLayer.checked));
+
+    function makeNonStateSvgElementsTransparentToMouse() {
+      if (!svgEl || !statesLayerEl) return;
+
+      // Gli elementi disegnati sopra il layer degli Stati, per esempio confini,
+      // etichette o altri path, possono intercettare il mouse prima dei Paesi.
+      // Li lasciamo visibili, ma li rendiamo trasparenti agli eventi.
+      svgEl.querySelectorAll('*').forEach(el => {
+        if (el === statesLayerEl || statesLayerEl.contains(el)) return;
+        el.style.pointerEvents = 'none';
+      });
+    }
+
+    function getInteractivePathFromEvent(event) {
+      const target = event.target;
+      if (!target || !target.closest) return null;
+      const path = target.closest('path.interactive-state');
+      if (!path || !statesLayerEl || !statesLayerEl.contains(path)) return null;
+      return path;
+    }
+
+    function wireStates() {
+      statesLayerEl = svgEl.querySelector(`#${CSS.escape(STATES_LAYER_ID)}`);
+      const searchRoot = statesLayerEl || svgEl;
+      const paths = Array.from(searchRoot.querySelectorAll('path')).filter(path => getStateLabel(path));
+
+      if (!statesLayerEl) {
+        stateDetails.innerHTML = `Attenzione: non ho trovato il layer <code>${STATES_LAYER_ID}</code>. Uso tutti i path con etichetta disponibili nel file SVG.`;
+      }
+
+      // Evita che layer sovrapposti intercettino il click al posto degli Stati.
+      makeNonStateSvgElementsTransparentToMouse();
+
+      paths.forEach(path => {
+        path.classList.add('interactive-state');
+        path.style.pointerEvents = 'all';
+        path.setAttribute('tabindex', '0');
+      });
+
+      // Event delegation: un solo insieme di listener sul layer.
+      // E' piu' robusto quando aggiungi o modifichi path nel file SVG.
+      const eventRoot = statesLayerEl || svgEl;
+
+      eventRoot.addEventListener('mouseover', event => {
+        const path = getInteractivePathFromEvent(event);
+        if (!path) return;
+        const label = getStateLabel(path);
+        showStateInfo(path);
+        tooltip.textContent = label;
+        tooltip.style.display = 'block';
+      });
+
+      eventRoot.addEventListener('mousemove', event => {
+        const path = getInteractivePathFromEvent(event);
+        if (!path) return;
+        tooltip.style.left = `${event.clientX}px`;
+        tooltip.style.top = `${event.clientY}px`;
+      });
+
+      eventRoot.addEventListener('mouseout', event => {
+        const path = getInteractivePathFromEvent(event);
+        if (!path) return;
+        const related = event.relatedTarget;
+        if (related && related.closest && related.closest('path.interactive-state') === path) return;
+        tooltip.style.display = 'none';
+      });
+
+      eventRoot.addEventListener('click', event => {
+        const path = getInteractivePathFromEvent(event);
+        if (!path) return;
+        event.preventDefault();
+        event.stopPropagation();
+
+        const label = getStateLabel(path);
+        if (selectedState) selectedState.classList.remove('selected-state');
+        selectedState = path;
+        selectedState.classList.add('selected-state');
+        showStateInfo(path);
+        loadMarkdownForState(label);
+      });
+
+      eventRoot.addEventListener('keydown', event => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        const path = event.target && event.target.closest ? event.target.closest('path.interactive-state') : null;
+        if (!path) return;
+        event.preventDefault();
+        const label = getStateLabel(path);
+        if (selectedState) selectedState.classList.remove('selected-state');
+        selectedState = path;
+        selectedState.classList.add('selected-state');
+        showStateInfo(path);
+        loadMarkdownForState(label);
+      });
+
+      if (!paths.length) {
+        stateDetails.innerHTML = `Nessun path con <code>inkscape:label</code> o <code>id</code> trovato nel layer <code>${STATES_LAYER_ID}</code>.`;
+      } else {
+        stateDetails.innerHTML = `Trovati <strong>${paths.length}</strong> path interattivi nel layer Stati. Clicca su uno Stato per aprire la scheda Markdown.`;
+      }
+
+      console.info(`Mappa Africa: trovati ${paths.length} path interattivi`, paths.map(p => getStateLabel(p)));
+    }
+
+    function setupResizableSplit() {
+      const root = document.documentElement;
+      const minPanelWidth = 300;
+      const minMapWidth = 320;
+      const storageKey = 'africaMapInfoPanelWidth';
+
+      function getPanelWidth() {
+        const value = getComputedStyle(root).getPropertyValue('--info-panel-width').trim();
+        const parsed = parseFloat(value);
+        return Number.isFinite(parsed) ? parsed : 420;
+      }
+
+      function setPanelWidth(width) {
+        const available = window.innerWidth;
+        const splitterWidth = splitter.getBoundingClientRect().width || 10;
+        const maxPanelWidth = Math.max(minPanelWidth, available - minMapWidth - splitterWidth);
+        const clamped = Math.min(maxPanelWidth, Math.max(minPanelWidth, width));
+        root.style.setProperty('--info-panel-width', `${Math.round(clamped)}px`);
+        splitter.setAttribute('aria-valuenow', String(Math.round(clamped)));
+        splitter.setAttribute('aria-valuemin', String(minPanelWidth));
+        splitter.setAttribute('aria-valuemax', String(Math.round(maxPanelWidth)));
+        localStorage.setItem(storageKey, String(Math.round(clamped)));
+      }
+
+      const savedWidth = parseFloat(localStorage.getItem(storageKey));
+      if (Number.isFinite(savedWidth)) setPanelWidth(savedWidth);
+      splitter.setAttribute('aria-valuenow', String(Math.round(getPanelWidth())));
+
+      let isResizing = false;
+
+      splitter.addEventListener('pointerdown', event => {
+        if (event.button !== 0) return;
+        isResizing = true;
+        splitter.classList.add('dragging');
+        document.body.classList.add('resizing');
+        splitter.setPointerCapture(event.pointerId);
+        event.preventDefault();
+      });
+
+      splitter.addEventListener('pointermove', event => {
+        if (!isResizing) return;
+        const newPanelWidth = window.innerWidth - event.clientX - (splitter.getBoundingClientRect().width / 2);
+        setPanelWidth(newPanelWidth);
+      });
+
+      function stopResize(event) {
+        if (!isResizing) return;
+        isResizing = false;
+        splitter.classList.remove('dragging');
+        document.body.classList.remove('resizing');
+        try { splitter.releasePointerCapture(event.pointerId); } catch (e) {}
+      }
+
+      splitter.addEventListener('pointerup', stopResize);
+      splitter.addEventListener('pointercancel', stopResize);
+
+      splitter.addEventListener('keydown', event => {
+        const step = event.shiftKey ? 80 : 30;
+        if (event.key === 'ArrowLeft') {
+          setPanelWidth(getPanelWidth() + step);
+          event.preventDefault();
+        }
+        if (event.key === 'ArrowRight') {
+          setPanelWidth(getPanelWidth() - step);
+          event.preventDefault();
+        }
+      });
+
+      window.addEventListener('resize', () => {
+        setPanelWidth(getPanelWidth());
+      });
+    }
+
+    function setupPanAndZoom() {
+      document.getElementById('zoomIn').addEventListener('click', () => {
+        const rect = stage.getBoundingClientRect();
+        zoomAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 1.25);
+      });
+
+      document.getElementById('zoomOut').addEventListener('click', () => {
+        const rect = stage.getBoundingClientRect();
+        zoomAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 0.8);
+      });
+
+      document.getElementById('resetView').addEventListener('click', resetView);
+
+      stage.addEventListener('wheel', event => {
+        event.preventDefault();
+        if (event.ctrlKey || event.metaKey) {
+          const factor = event.deltaY < 0 ? 1.12 : 0.89;
+          zoomAt(event.clientX, event.clientY, factor);
+          return;
+        }
+        if (scale <= 1.001 && !event.shiftKey && Math.abs(event.deltaX) < 1) return;
+        if (event.shiftKey) {
+          translateX -= event.deltaY;
+        } else {
+          translateX -= event.deltaX;
+          translateY -= event.deltaY;
+        }
+        applyTransform();
+      }, { passive: false });
+
+      let isDragging = false;
+      let startX = 0;
+      let startY = 0;
+      let originX = 0;
+      let originY = 0;
+
+      stage.addEventListener('pointerdown', event => {
+        if (event.button !== 0) return;
+
+        // Se il puntatore parte da uno Stato, lasciamo il click al path.
+        // Per trascinare la mappa, usa lo sfondo o un'area non interattiva.
+        if (event.target && event.target.closest && event.target.closest('path.interactive-state')) return;
+
+        isDragging = true;
+        stage.classList.add('dragging');
+        stage.setPointerCapture(event.pointerId);
+        startX = event.clientX;
+        startY = event.clientY;
+        originX = translateX;
+        originY = translateY;
+      });
+
+      stage.addEventListener('pointermove', event => {
+        if (!isDragging) return;
+        translateX = originX + event.clientX - startX;
+        translateY = originY + event.clientY - startY;
+        applyTransform();
+      });
+
+      function endDrag(event) {
+        if (!isDragging) return;
+        isDragging = false;
+        stage.classList.remove('dragging');
+        try { stage.releasePointerCapture(event.pointerId); } catch (e) {}
+      }
+
+      stage.addEventListener('pointerup', endDrag);
+      stage.addEventListener('pointercancel', endDrag);
+      window.addEventListener('resize', resetView);
+    }
+
+    async function loadSvg() {
+      try {
+        const response = await fetch(SVG_FILE);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const svgText = await response.text();
+        container.innerHTML = svgText;
+        svgEl = container.querySelector('svg');
+        if (!svgEl) throw new Error('Il file caricato non contiene un elemento <svg>.');
+        svgEl.setAttribute('draggable', 'false');
+        wireStates();
+        toggleStatesLayer.checked = true;
+        setStatesLayerVisibility(true);
+        resetView();
+      } catch (error) {
+        container.innerHTML = `
+          <div class="error">
+            <strong>Impossibile caricare ${SVG_FILE}</strong><br><br>
+            Metti questo file HTML nella stessa cartella di <code>${SVG_FILE}</code>, crea la sottocartella <code>${INFO_FOLDER}</code>,
+            e aprilo tramite un piccolo server locale:<br><br>
+            <code>python -m http.server 8000</code><br><br>
+            Errore: ${escapeHtml(error.message)}
+          </div>`;
+      }
+    }
+
+    setupResizableSplit();
+    setupPanAndZoom();
+    loadSvg();
+  </script>
+</body>
+</html>

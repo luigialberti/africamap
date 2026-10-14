@@ -1,30 +1,33 @@
 # Sicurezza - Gabon
 
-<!-- ALERT -->
-**Monitorare**: Verificare sicurezza, situazione politica, condizioni sanitarie e spostamenti fuori Libreville/Port-Gentil.
-<!-- /ALERT -->
-
 ## Sintesi operativa
 
 | Voce | Indicazione |
 |---|---|
 | Paese | Gabon |
 | Codice ViaggiareSicuri | `GAB` |
-| Livello sintetico per la mappa | Monitorare |
+| Livello sintetico per la mappa | Cautela (dettagli da verificare) (etichetta editoriale) |
 | Fonte principale | [ViaggiareSicuri - Gabon](https://www.viaggiaresicuri.it/find-country/country/GAB) |
-| Data consultazione | 2026-06-11 |
+| Data aggiornamento fonte | 14/07/2026 |
+| Data consultazione | 2026-10-14 |
 
 ## Punti di attenzione
 
-- Monitorare eventuali tensioni politiche o manifestazioni.
-- Pianificare trasferte interne con supporto locale.
-- Verificare requisiti sanitari e copertura assicurativa.
-
+- La scheda ufficiale indica la presenza nel Paese di alcune aree che richiedono particolare cautela da parte del viaggiatore: consultare la sezione Sicurezza della scheda corrente per l'elenco aggiornato.
+- Vaccinazione contro la febbre gialla obbligatoria per l'ingresso.
+- Verificare nella sezione Requisiti di ingresso le modalità di ottenimento del visto.
 
 ## Descrizione estesa
 
-Questa scheda riassume gli elementi di rischio da considerare per una mappa informativa e per una prima valutazione operativa. Le condizioni possono cambiare rapidamente: prima di missioni universitarie, mobilità studentesca, sopralluoghi o attività sul campo occorre verificare la scheda aggiornata su ViaggiareSicuri, coordinarsi con partner locali e predisporre contatti di emergenza.
+In questa esecuzione è stato possibile verificare la data di ultimo aggiornamento (14/07/2026) e le indicazioni della sezione "In primo piano", ma non il dettaglio delle aree di particolare cautela della sezione Sicurezza. La scheda precedente non è stata riutilizzata come prova dell'attualità dei rischi.
+
+Stato: **parzialmente verificato**. Prima di qualsiasi missione consultare integralmente la scheda ufficiale.
+
+## Fonti e aggiornamenti
+
+- [ViaggiareSicuri - scheda Gabon](https://www.viaggiaresicuri.it/find-country/country/GAB) — consultata il 2026-10-14; ultimo aggiornamento indicato dalla fonte: 14/07/2026.
+- [ViaggiareSicuri - scheda Gabon in PDF](https://www.viaggiaresicuri.it/schede_paese/pdf/GAB.pdf) — testo ufficiale consultato tramite estratti indicizzati del PDF.
 
 ## Nota d'uso
 
-Questa scheda è un riassunto operativo per la mappa interattiva. Non sostituisce la fonte ufficiale. Prima di organizzare viaggi, missioni, mobilità studentesca o attività sul campo, consultare sempre ViaggiareSicuri e registrare la presenza su Dove Siamo nel Mondo quando opportuno.
+Scheda informativa di sintesi, non sostitutiva di ViaggiareSicuri. Prima di viaggi, missioni, mobilità studentesca o attività sul campo, controllare la scheda ufficiale più recente, registrare il viaggio su [Dove Siamo nel Mondo](https://www.dovesiamonelmondo.it/) e seguire le indicazioni dell'Ateneo. Il "Livello sintetico per la mappa" è un'etichetta editoriale dell'applicazione, non una classificazione ufficiale del Ministero.

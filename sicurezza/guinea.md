@@ -1,30 +1,35 @@
 # Sicurezza - Guinea
 
-<!-- ALERT -->
-**Attenzione**: Verificare aggiornamenti su sicurezza, tensioni politiche, sanità e aree di frontiera prima di viaggi e missioni.
-<!-- /ALERT -->
-
 ## Sintesi operativa
 
 | Voce | Indicazione |
 |---|---|
 | Paese | Guinea |
 | Codice ViaggiareSicuri | `GIN` |
-| Livello sintetico per la mappa | Attenzione |
+| Livello sintetico per la mappa | Cautela elevata, con zone da evitare (etichetta editoriale) |
 | Fonte principale | [ViaggiareSicuri - Guinea](https://www.viaggiaresicuri.it/find-country/country/GIN) |
-| Data consultazione | 2026-06-11 |
+| Data aggiornamento fonte | 03/09/2026 (versione del PDF ufficiale indicizzata) |
+| Data consultazione | 2026-10-14 |
 
 ## Punti di attenzione
 
-- Evitare manifestazioni e assembramenti.
-- Pianificare trasferte interne con supporto locale.
-- Monitorare condizioni sanitarie e requisiti vaccinali.
-
+- Mantenere elevata la soglia di attenzione in tutto il Paese; particolare cautela negli spostamenti, soprattutto di notte.
+- A Conakry evitare le aree urbane di Bambeto, Cosa, Dixinn e Matam, il lungomare presso i terminal container e il mercato del pesce di Boulbinet; visitare la capitale con particolari precauzioni anche di giorno.
+- Segnalati episodi di banditismo, anche violento, nelle zone di confine con la Guinea-Bissau e il Senegal.
+- Nella stagione delle piogge (fine giugno-inizio ottobre) possibili inondazioni improvvise con vittime.
+- Non cambiare valuta per strada; cautela con i pagamenti con carta; vietato fotografare luoghi pubblici, in particolare l'aeroporto.
 
 ## Descrizione estesa
 
-Questa scheda riassume gli elementi di rischio da considerare per una mappa informativa e per una prima valutazione operativa. Le condizioni possono cambiare rapidamente: prima di missioni universitarie, mobilità studentesca, sopralluoghi o attività sul campo occorre verificare la scheda aggiornata su ViaggiareSicuri, coordinarsi con partner locali e predisporre contatti di emergenza.
+La scheda ufficiale non sconsiglia l'intero Paese ma individua numerose zone urbane di Conakry da evitare e rischi di banditismo nelle aree di confine nord-occidentali. Per missioni universitarie è opportuno pianificare spostamenti diurni con autisti affidabili e alloggi in strutture sicure.
+
+Il contenuto è stato letto tramite estratti indicizzati del PDF/della pagina ufficiale; la scheda online potrebbe essere stata aggiornata dopo la data indicata.
+
+## Fonti e aggiornamenti
+
+- [ViaggiareSicuri - scheda Guinea](https://www.viaggiaresicuri.it/find-country/country/GIN) — consultata il 2026-10-14; ultimo aggiornamento indicato dalla fonte: 03/09/2026 (versione del PDF ufficiale indicizzata).
+- [ViaggiareSicuri - scheda Guinea in PDF](https://www.viaggiaresicuri.it/schede_paese/pdf/GIN.pdf) — testo ufficiale consultato tramite estratti indicizzati del PDF.
 
 ## Nota d'uso
 
-Questa scheda è un riassunto operativo per la mappa interattiva. Non sostituisce la fonte ufficiale. Prima di organizzare viaggi, missioni, mobilità studentesca o attività sul campo, consultare sempre ViaggiareSicuri e registrare la presenza su Dove Siamo nel Mondo quando opportuno.
+Scheda informativa di sintesi, non sostitutiva di ViaggiareSicuri. Prima di viaggi, missioni, mobilità studentesca o attività sul campo, controllare la scheda ufficiale più recente, registrare il viaggio su [Dove Siamo nel Mondo](https://www.dovesiamonelmondo.it/) e seguire le indicazioni dell'Ateneo. Il "Livello sintetico per la mappa" è un'etichetta editoriale dell'applicazione, non una classificazione ufficiale del Ministero.

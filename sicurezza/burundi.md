@@ -1,7 +1,7 @@
 # Sicurezza - Burundi
 
 <!-- ALERT -->
-**Attenzione**: Verificare la situazione politica, sanitaria e di sicurezza prima di viaggi o missioni; particolare cautela nelle aree di confine e negli spostamenti interni.
+**Attenzione**: ViaggiareSicuri sconsiglia di recarsi nelle aree di confine con la Repubblica Democratica del Congo e con il Ruanda (province di Cibitoke, Bubanza, Kayanza, Ngozi, Kirundo, Muyinga).
 <!-- /ALERT -->
 
 ## Sintesi operativa
@@ -10,21 +10,30 @@
 |---|---|
 | Paese | Burundi |
 | Codice ViaggiareSicuri | `BDI` |
-| Livello sintetico per la mappa | Attenzione |
+| Livello sintetico per la mappa | Aree di confine sconsigliate (etichetta editoriale) |
 | Fonte principale | [ViaggiareSicuri - Burundi](https://www.viaggiaresicuri.it/find-country/country/BDI) |
-| Data consultazione | 2026-06-11 |
+| Data aggiornamento fonte | 29/12/2025 (versione del PDF ufficiale indicizzata) |
+| Data consultazione | 2026-10-14 |
 
 ## Punti di attenzione
 
-- Monitorare aggiornamenti su frontiere e stabilità locale.
-- Pianificare trasferte con partner locali e trasporti affidabili.
-- Evitare manifestazioni e assembramenti politici.
-
+- Si sconsiglia di recarsi nelle aree di confine con RD Congo e Ruanda: province di Cibitoke, Bubanza, Kayanza, Ngozi, Kirundo e Muyinga.
+- Resta chiusa, per motivi di sicurezza, la frontiera di Kavumira tra Burundi e RD Congo.
+- Disordini registrati con una certa regolarità: il 10 maggio 2024 esplosioni di granate a Bujumbura hanno causato 3 morti e 38 feriti.
+- Micro-criminalità diffusa; presenza di bande armate al confine con RD Congo e Tanzania; in passato episodi di violenza contro stranieri, inclusi italiani.
+- Cautela particolare nelle aree a nord-ovest di Bujumbura, verso il confine congolese.
 
 ## Descrizione estesa
 
-Questa scheda riassume gli elementi di rischio da considerare per una mappa informativa e per una prima valutazione operativa. Le condizioni possono cambiare rapidamente: prima di missioni universitarie, mobilità studentesca, sopralluoghi o attività sul campo occorre verificare la scheda aggiornata su ViaggiareSicuri, coordinarsi con partner locali e predisporre contatti di emergenza.
+La scheda ufficiale descrive una situazione di sicurezza fragile, con disordini ricorrenti, criminalità diffusa legata alle difficoltà economiche e rischi concentrati nelle province di confine occidentali e settentrionali. Per eventuali attività universitarie è opportuno limitarsi a Bujumbura e Gitega con le precauzioni indicate, evitare spostamenti notturni e coordinarsi con l'Ambasciata competente.
+
+Il contenuto è stato letto tramite estratti indicizzati del PDF ufficiale (versione con aggiornamento 29/12/2025); la scheda online potrebbe essere stata aggiornata. Nel 2025 il Burundi ha riorganizzato le proprie province: i nomi riportati dalla fonte potrebbero non corrispondere alla nuova suddivisione.
+
+## Fonti e aggiornamenti
+
+- [ViaggiareSicuri - scheda Burundi](https://www.viaggiaresicuri.it/find-country/country/BDI) — consultata il 2026-10-14; ultimo aggiornamento indicato dalla fonte: 29/12/2025 (versione del PDF ufficiale indicizzata).
+- [ViaggiareSicuri - scheda Burundi in PDF](https://www.viaggiaresicuri.it/schede_paese/pdf/BDI.pdf) — testo ufficiale consultato tramite estratti indicizzati del PDF.
 
 ## Nota d'uso
 
-Questa scheda è un riassunto operativo per la mappa interattiva. Non sostituisce la fonte ufficiale. Prima di organizzare viaggi, missioni, mobilità studentesca o attività sul campo, consultare sempre ViaggiareSicuri e registrare la presenza su Dove Siamo nel Mondo quando opportuno.
+Scheda informativa di sintesi, non sostitutiva di ViaggiareSicuri. Prima di viaggi, missioni, mobilità studentesca o attività sul campo, controllare la scheda ufficiale più recente, registrare il viaggio su [Dove Siamo nel Mondo](https://www.dovesiamonelmondo.it/) e seguire le indicazioni dell'Ateneo. Il "Livello sintetico per la mappa" è un'etichetta editoriale dell'applicazione, non una classificazione ufficiale del Ministero.

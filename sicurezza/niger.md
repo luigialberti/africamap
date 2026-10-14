@@ -1,7 +1,7 @@
 # Sicurezza - Niger
 
 <!-- ALERT -->
-**Attenzione elevata**: Contesto di sicurezza molto critico in numerose aree; consultare ViaggiareSicuri e canali diplomatici prima di ogni ipotesi di missione.
+**Attenzione elevata**: ViaggiareSicuri sconsiglia viaggi a qualsiasi titolo in Niger, alla luce dell'insicurezza nell'intera area saheliana; il rischio di rapimenti e criminalità ai danni di occidentali è altissimo a Niamey e in tutto il Paese. Assolutamente sconsigliate le zone al confine con Mali, Algeria, Libia, Ciad, Nigeria e Burkina Faso.
 <!-- /ALERT -->
 
 ## Sintesi operativa
@@ -10,21 +10,30 @@
 |---|---|
 | Paese | Niger |
 | Codice ViaggiareSicuri | `NER` |
-| Livello sintetico per la mappa | Attenzione elevata |
+| Livello sintetico per la mappa | Viaggi sconsigliati in tutto il Paese (etichetta editoriale) |
 | Fonte principale | [ViaggiareSicuri - Niger](https://www.viaggiaresicuri.it/find-country/country/NER) |
-| Data consultazione | 2026-06-11 |
+| Data aggiornamento fonte | 25/06/2026 (versione del PDF ufficiale indicizzata) |
+| Data consultazione | 2026-10-14 |
 
 ## Punti di attenzione
 
-- Evitare aree sconsigliate e frontiere sensibili.
-- Pianificare solo attività indispensabili con partner affidabili e piani di sicurezza.
-- Monitorare situazione politica, sicurezza e sanità.
-
+- Si sconsigliano viaggi a qualsiasi titolo nel Paese.
+- Rischio di rapimenti e atti criminali contro cittadini occidentali altissimo, a Niamey e in tutte le aree del Paese.
+- Assolutamente sconsigliati i viaggi nelle zone al confine con Mali, Algeria, Libia, Ciad, Nigeria e Burkina Faso.
+- Per uscire da Niamey è obbligatorio rivolgersi alle autorità di sicurezza locali per una scorta armata; pianificare con attenzione ogni itinerario.
+- Manifestazioni anche non preannunciate possono degenerare in scontri; nella stagione delle piogge le esondazioni del fiume Niger possono isolare parti della capitale.
 
 ## Descrizione estesa
 
-Questa scheda riassume gli elementi di rischio da considerare per una mappa informativa e per una prima valutazione operativa. Le condizioni possono cambiare rapidamente: prima di missioni universitarie, mobilità studentesca, sopralluoghi o attività sul campo occorre verificare la scheda aggiornata su ViaggiareSicuri, coordinarsi con partner locali e predisporre contatti di emergenza.
+La scheda ufficiale non individua aree sicure: lo sconsiglio riguarda l'intero territorio, compresa la capitale. Missioni universitarie, mobilità e attività sul campo non sono compatibili con queste indicazioni.
+
+Il contenuto è stato letto tramite estratti indicizzati del PDF ufficiale; la scheda online potrebbe essere stata aggiornata dopo la data indicata.
+
+## Fonti e aggiornamenti
+
+- [ViaggiareSicuri - scheda Niger](https://www.viaggiaresicuri.it/find-country/country/NER) — consultata il 2026-10-14; ultimo aggiornamento indicato dalla fonte: 25/06/2026 (versione del PDF ufficiale indicizzata).
+- [ViaggiareSicuri - scheda Niger in PDF](https://www.viaggiaresicuri.it/schede_paese/pdf/NER.pdf) — testo ufficiale consultato tramite estratti indicizzati del PDF.
 
 ## Nota d'uso
 
-Questa scheda è un riassunto operativo per la mappa interattiva. Non sostituisce la fonte ufficiale. Prima di organizzare viaggi, missioni, mobilità studentesca o attività sul campo, consultare sempre ViaggiareSicuri e registrare la presenza su Dove Siamo nel Mondo quando opportuno.
+Scheda informativa di sintesi, non sostitutiva di ViaggiareSicuri. Prima di viaggi, missioni, mobilità studentesca o attività sul campo, controllare la scheda ufficiale più recente, registrare il viaggio su [Dove Siamo nel Mondo](https://www.dovesiamonelmondo.it/) e seguire le indicazioni dell'Ateneo. Il "Livello sintetico per la mappa" è un'etichetta editoriale dell'applicazione, non una classificazione ufficiale del Ministero.

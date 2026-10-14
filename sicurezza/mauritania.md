@@ -1,7 +1,7 @@
 # Sicurezza - Mauritania
 
 <!-- ALERT -->
-**Attenzione**: Verificare aree sconsigliate, zone desertiche e confini; pianificare con cautela spostamenti fuori Nouakchott e Nouadhibou.
+**Attenzione**: ViaggiareSicuri sconsiglia le zone di confine della Mauritania, in particolare a est e sud-est con il Mali, nonché la regione settentrionale tra Mauritania, Algeria e Sahara Occidentale; raccomanda in ogni caso massima prudenza.
 <!-- /ALERT -->
 
 ## Sintesi operativa
@@ -10,21 +10,29 @@
 |---|---|
 | Paese | Mauritania |
 | Codice ViaggiareSicuri | `MRT` |
-| Livello sintetico per la mappa | Attenzione |
+| Livello sintetico per la mappa | Aree di confine sconsigliate (etichetta editoriale) |
 | Fonte principale | [ViaggiareSicuri - Mauritania](https://www.viaggiaresicuri.it/find-country/country/MRT) |
-| Data consultazione | 2026-06-11 |
+| Data aggiornamento fonte | Non indicata/verificabile negli estratti consultati |
+| Data consultazione | 2026-10-14 |
 
 ## Punti di attenzione
 
-- Evitare aree remote senza supporto logistico qualificato.
-- Monitorare sicurezza regionale e condizioni di frontiera.
-- Verificare sanità, comunicazioni e mezzi di trasporto.
-
+- Sconsigliate le zone di confine, in particolare a est e sud-est con il Mali.
+- Sconsigliata la regione settentrionale tra Mauritania, Algeria e Sahara Occidentale.
+- Massima prudenza raccomandata in tutto il Paese.
+- Visto da richiedere obbligatoriamente online sul portale governativo (anrpts.gov.mr), verificandone la concessione prima del viaggio; passaporto con almeno 6 mesi di validità.
 
 ## Descrizione estesa
 
-Questa scheda riassume gli elementi di rischio da considerare per una mappa informativa e per una prima valutazione operativa. Le condizioni possono cambiare rapidamente: prima di missioni universitarie, mobilità studentesca, sopralluoghi o attività sul campo occorre verificare la scheda aggiornata su ViaggiareSicuri, coordinarsi con partner locali e predisporre contatti di emergenza.
+La sezione "In primo piano" della scheda ufficiale concentra lo sconsiglio sulle aree di frontiera orientali e settentrionali, nel contesto di insicurezza dell'area saheliana. Per eventuali attività a Nouakchott o Nouadhibou valgono cautele elevate e coordinamento con l'Ambasciata d'Italia a Nouakchott.
+
+Il contenuto è stato letto tramite un estratto indicizzato della pagina ufficiale; la data di ultimo aggiornamento non è risultata verificabile. Revisione manuale consigliata.
+
+## Fonti e aggiornamenti
+
+- [ViaggiareSicuri - scheda Mauritania](https://www.viaggiaresicuri.it/find-country/country/MRT) — consultata il 2026-10-14; ultimo aggiornamento indicato dalla fonte: Non indicata/verificabile negli estratti consultati.
+- [ViaggiareSicuri - scheda Mauritania in PDF](https://www.viaggiaresicuri.it/schede_paese/pdf/MRT.pdf) — testo ufficiale consultato tramite estratti indicizzati del PDF.
 
 ## Nota d'uso
 
-Questa scheda è un riassunto operativo per la mappa interattiva. Non sostituisce la fonte ufficiale. Prima di organizzare viaggi, missioni, mobilità studentesca o attività sul campo, consultare sempre ViaggiareSicuri e registrare la presenza su Dove Siamo nel Mondo quando opportuno.
+Scheda informativa di sintesi, non sostitutiva di ViaggiareSicuri. Prima di viaggi, missioni, mobilità studentesca o attività sul campo, controllare la scheda ufficiale più recente, registrare il viaggio su [Dove Siamo nel Mondo](https://www.dovesiamonelmondo.it/) e seguire le indicazioni dell'Ateneo. Il "Livello sintetico per la mappa" è un'etichetta editoriale dell'applicazione, non una classificazione ufficiale del Ministero.

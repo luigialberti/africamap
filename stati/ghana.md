@@ -44,6 +44,8 @@ Sito: [University of Ghana](https://www.ug.edu.gh/)
 
 Grande università pubblica ad Accra. Per l'area tecnica è rilevante la **School of Engineering Sciences**, con percorsi in discipline ingegneristiche e applicate. Link: [School of Engineering Sciences](https://www.ug.edu.gh/eng/).
 
+Ranking: [QS-8](https://www.topuniversities.com/universities/university-ghana)
+
 ### University of Mines and Technology (UMaT)
 
 Sito: [UMaT](https://www.umat.edu.gh/)

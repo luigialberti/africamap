@@ -57,6 +57,19 @@ Sito: [Jimma University](https://ju.edu.et/)
 
 Ateneo pubblico importante per salute, agricoltura, scienze e tecnologia. Il **Jimma Institute of Technology** è rilevante per ingegneria civile, elettrica, meccanica, ICT e discipline applicate. Link: [Jimma Institute of Technology](https://ju.edu.et/jit/).
 
+## QS Ranking
+
+| Rank QS SSA 2026 | Università                   | Paese    | Score | Faculty Student Ratio | Academic Reputation | Employer Reputation |
+| ---------------: | ---------------------------- | -------- | ----: | --------------------: | ------------------: | ------------------: |
+|               13 | Addis Ababa University (AAU) | Ethiopia |  67.0 |                  42.3 |                63.6 |                64.7 |
+|               28 | Mekelle University (MU)      | Ethiopia |  34.3 |                 100.0 |                10.1 |                 1.6 |
+|               35 | Hawassa University (HWU)     | Ethiopia |  27.4 |                 100.0 |                 8.4 |                   — |
+|               38 | Gondar University            | Ethiopia |  24.9 |                 100.0 |                 1.2 |                   — |
+|              51+ | Arsi University              | Ethiopia |     — |                  78.7 |                 1.0 |                   — |
+|              51+ | Bule Hora University (BHU)   | Ethiopia |     — |                  56.4 |                 1.4 |                 1.0 |
+|              51+ | Dilla University (DU)        | Ethiopia |     — |                  99.1 |                 3.3 |                   — |
+|              51+ | Dire Dawa University         | Ethiopia |     — |                  76.1 |                 4.6 |                   — |
+
 ## Fonti rapide
 
 - [OpenFactBook - Ethiopia](https://openfactbook.org/countries/ethiopia/)
